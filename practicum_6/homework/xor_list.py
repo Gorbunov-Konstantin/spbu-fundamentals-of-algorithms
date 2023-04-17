@@ -86,14 +86,14 @@ class XorDoublyLinkedList:
             prev_p, next_p = next_p, next_el.next(prev_p)
             next_el = ctypes.cast(next_p, ctypes.py_object).value
         if next_p != 0:
-            prev_el = ctypes.cast(prev_p, ctypes.py_object).value
             next_next_p = next_el.np ^ prev_p
-            next_next_el = ctypes.cast(next_next_p, ctypes.py_object).value
             if prev_p != 0:
+                prev_el = ctypes.cast(prev_p, ctypes.py_object).value
                 prev_el.np = prev_el.np ^ next_p ^ next_next_p
             else:
                 self.head = next_next_el
             if next_next_p != 0:
+                next_next_el = ctypes.cast(next_next_p, ctypes.py_object).value
                 next_next_el.np = next_next_el.np ^ next_p ^ prev_p
             else:
                 self.tail = prev_el
